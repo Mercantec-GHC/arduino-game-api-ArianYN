@@ -1,0 +1,5 @@
+ASS-Di-Stroid-API/*appsettings.json
+../.idea
+bin
+obj
+*.dll

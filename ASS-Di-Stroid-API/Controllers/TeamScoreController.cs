@@ -95,7 +95,7 @@ public class TeamScoreController : ControllerBase
         return Ok(scoreToReturn);
     }
 
-    [HttpGet("delete-teamscore")]
+    [HttpDelete("delete-teamscore")]
     public async Task<IActionResult> DeleteTeamScore([FromQuery] string team_name)
     {
         if (team_name == "")

@@ -94,4 +94,22 @@ public class TeamScoreController : ControllerBase
         
         return Ok(scoreToReturn);
     }
+
+    [HttpGet("delete-teamscore")]
+    public async Task<IActionResult> DeleteTeamScore([FromQuery] string team_name)
+    {
+        if (team_name == "")
+        {
+            return BadRequest("Missing 'team_name' parameter");
+        }
+        
+        IQueryable<TeamScore> query = _context.TeamScores.AsQueryable();
+        query = query.Where(t => t.team_name == team_name);
+        
+        TeamScore teamToDelete = await query.FirstOrDefaultAsync();
+        
+        _context.TeamScores.Remove(teamToDelete);
+        await _context.SaveChangesAsync();
+        return Ok($"Deleted Team: {team_name}");
+    }
 }
